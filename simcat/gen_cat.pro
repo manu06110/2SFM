@@ -66,21 +66,20 @@ PRO gen_cat, ID ,$    ; Identification
      printf,lun, '------------------------------------------------------------'
   ENDIF
 
-  ; gen_sfr,ID, $
-  ;         Mstar,$         
-  ;         zgal,$          
-  ;         type,$          
-  ;         SFR,$           
-  ;         logSFRms,$      
-  ;         logsSFRexcess,$
-  ;         lun, $
-  ;         mc = mc, $
-  ;         disp_prog = disp_prog
-
-  ; IF keyword_set(mc) EQ 0 THEN BEGIN
-  ;    printf,lun, '------------------------------------------------------------'
-  ;    printf,lun, '------------------------------------------------------------'
-  ; ENDIF
+  gen_sfr,ID, $
+          Mstar,$         
+          zgal,$          
+          type,$          
+          SFR,$           
+          logSFRms,$
+          lun, $
+          mc = mc, $
+          disp_prog = disp_prog
+          
+  IF keyword_set(mc) EQ 0 THEN BEGIN
+     printf,lun, '------------------------------------------------------------'
+     printf,lun, '------------------------------------------------------------'
+  ENDIF
 
   ; gen_att_lum,Mstar,$
   ;             zgal,$
