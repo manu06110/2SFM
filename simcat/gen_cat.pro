@@ -171,11 +171,11 @@ PRO gen_cat, ID ,$    ; Identification
   ; ;                  mc = mc, $
   ; ;                  disp_prog = disp_prog
 
-  IF keyword_set(mc) EQ 0 THEN BEGIN
-     printf,lun, '------------------------------------------------------------'
-     printf,lun, '------------------------------------------------------------'
-     free_lun, lun
-  ENDIF
+  ; IF keyword_set(mc) EQ 0 THEN BEGIN
+  ;    printf,lun, '------------------------------------------------------------'
+  ;    printf,lun, '------------------------------------------------------------'
+  ;    free_lun, lun
+  ; ENDIF
 
   logfile = 'no'
   IF keyword_set(mc) EQ 0 THEN $
