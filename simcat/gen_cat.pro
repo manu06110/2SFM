@@ -94,40 +94,47 @@ PRO gen_cat, ID ,$    ; Identification
               mc = mc, $
               disp_prog = disp_prog
 
-  ; IF keyword_set(mc) EQ 0 THEN BEGIN
-  ;    printf,lun, '------------------------------------------------------------'
-  ;    printf,lun, '------------------------------------------------------------'
-  ; ENDIF
+  IF keyword_set(mc) EQ 0 THEN BEGIN
+     printf,lun, '------------------------------------------------------------'
+     printf,lun, '------------------------------------------------------------'
+  ENDIF
   
-  ; ;;We combine passive and active
-  ; sfactive = [Mstar*0.+1.,Mstar_pass*0.]
-  ; Mstar = [Mstar,Mstar_pass]
-  ; SFR = [SFR,Mstar_pass*0]
-  ; zgal = [zgal,zgal_pass]
-  ; ID = [ID,max(ID)+ID_pass]
+  ;;We combine passive and active
+  sfactive = [Mstar*0.+1.,Mstar_pass*0.]
+  Mstar = [Mstar,Mstar_pass]
+  SFR = [SFR,Mstar_pass*0]
+  zgal = [zgal,zgal_pass]
+  ID = [ID,max(ID)+ID_pass]
+  type = [type, Mstar_pass*0-1]
+  logSFRms = [logSFRms, logSFRms*0.-99.]
+  SFRir = [SFRir, SFRir*0.-99.]
+  SFRuv = [SFRuv, sfruv*0.-99.]
+  Lir = [Lir, Lir*0.-99.]
+  Luv = [Luv, Luv*0.-99.]
 
-  ; IF keyword_set(mc) EQ 0 THEN BEGIN
-  ;    printf,lun, '****************************************'
-  ;    printf,lun, '        FULL MOCK SF CATALOGUE'
-  ;    printf,lun, 'FIELD SIZE: '+strtrim(field_size,1)+' square degrees'
-  ;    printf,lun, 'REDSHIFT RANGE: '+strtrim(min(zgal),1)+ $
-  ;           ' - '+strtrim(max(zgal),1)
-  ;    printf,lun, 'NUMBER OF GALAXIES: '+strtrim(n_elements(Mstar),1)
-  ;    o = where(sfactive EQ 1.,n_o)
-  ;    frac = double(n_o)/double(n_elements(Mstar))*100
-  ;    printf,lun, 'FRACTION OF SF GALAXIES: '+strtrim(frac,1)+' %'
-  ;    printf,lun, '****************************************'
-     
-  ;    printf,lun, '------------------------------------------------------------'
-  ;    printf,lun, '------------------------------------------------------------'
-  ; ENDIF
+  gen_sfr_pass, Mstar,$
+                zgal,$
+                SFR,$
+                logSFRms, $
+                sfactive, $
+                mc = mc
   
-  ; gen_sfr_pass, Mstar,$
-  ;               zgal,$
-  ;               SFR,$
-  ;               logSFRms, $
-  ;               sfactive, $
-  ;               mc = mc
+
+  IF keyword_set(mc) EQ 0 THEN BEGIN
+     printf,lun, '****************************************'
+     printf,lun, '        FULL MOCK SF CATALOGUE'
+     printf,lun, 'FIELD SIZE: '+strtrim(field_size,1)+' square degrees'
+     printf,lun, 'REDSHIFT RANGE: '+strtrim(min(zgal),1)+ $
+            ' - '+strtrim(max(zgal),1)
+     printf,lun, 'NUMBER OF GALAXIES: '+strtrim(n_elements(Mstar),1)
+     o = where(sfactive EQ 1.,n_o)
+     frac = double(n_o)/double(n_elements(Mstar))*100
+     printf,lun, 'FRACTION OF SF GALAXIES: '+strtrim(frac,1)+' %'
+     printf,lun, '****************************************'
+     
+     printf,lun, '------------------------------------------------------------'
+     printf,lun, '------------------------------------------------------------'
+  ENDIF
   
   ; gen_bhar_mass,field_size, $
   ;               Mstar,$
