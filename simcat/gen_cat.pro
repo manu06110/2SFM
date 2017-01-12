@@ -10,11 +10,11 @@ PRO gen_cat, ID ,$    ; Identification
              Luv, $   ; UV luminosity
              loglambda, $ ; log of the Eddington ratio
              sfactive, $ ; Flag: star-forming (1) or quiescent (2)
-             field_size=field_size,$  ; Size of the field (in arc secondes); DEFAULT = 10"
+             field_size=field_size,$  ; Size of the field (in arc secondes); DEFAULT = 2"
              logMcut=logMcut,$ ; Low mass cut (mass function) in log; DEFAULT = 8
              mc=mc ; Add the random error on the parameters
 
-  ;; Open a progress bar
+  ;; keyword to open a progress bar (change to 0 if not wanted)
   IF keyword_set(mc) EQ 0 THEN $
      disp_prog = 1
   
@@ -32,7 +32,7 @@ PRO gen_cat, ID ,$    ; Identification
   
   ;;Define field size and logMcut if not defined (using default values)
   IF keyword_set(field_size) EQ 0 THEN $
-    field_size = 10
+    field_size = 2
   IF keyword_set(logMcut) EQ 0 THEN $
     logMcut = 8.
 
@@ -43,15 +43,14 @@ PRO gen_cat, ID ,$    ; Identification
             zgal,$      
             ID, $
             lun, $
-            dsche = dsche,$ 
             mc = mc,$        
-            mark_evol=mark_evol, $
             disp_prog = disp_prog
 
   IF keyword_set(mc) EQ 0 THEN BEGIN
      printf,lun, '------------------------------------------------------------'
      printf,lun, '------------------------------------------------------------'
   ENDIF
+
 
   ; gen_passive, field_size, $
   ;              logMcut, $
@@ -167,11 +166,11 @@ PRO gen_cat, ID ,$    ; Identification
   ; ;                  mc = mc, $
   ; ;                  disp_prog = disp_prog
 
-  ; IF keyword_set(mc) EQ 0 THEN BEGIN
-  ;    printf,lun, '------------------------------------------------------------'
-  ;    printf,lun, '------------------------------------------------------------'
-  ;    free_lun, lun
-  ; ENDIF
+  IF keyword_set(mc) EQ 0 THEN BEGIN
+     printf,lun, '------------------------------------------------------------'
+     printf,lun, '------------------------------------------------------------'
+     free_lun, lun
+  ENDIF
 
   ; logfile = 'no'
   ; IF keyword_set(mc) EQ 0 THEN $
@@ -195,12 +194,12 @@ PRO gen_cat, ID ,$    ; Identification
 
   ;    stop
 
-  ;    save, filename = '../catalogues/'+name+'.save',$
-  ;          FIELD_SIZE, $
-  ;          ID ,$             ;; ID
-  ;          zgal ,$           ;; redshift
-  ;          Mstar,$           ;; Mass
-  ;          type,$            ;; Ignore
+     save, filename = '../catalogues/'+name+'.save',$
+           FIELD_SIZE, $
+           ID ,$             ;; ID
+           zgal ,$           ;; redshift
+           Mstar;,$           ;; Mass
+           ; type,$            ;; Ignore
   ;          SFR,$             ;; The star formation rate (SFR)
   ;          logSFRms,$        ;; Ignore
   ;          logsSFRexcess, $

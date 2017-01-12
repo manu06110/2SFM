@@ -4,18 +4,17 @@ PRO gen_mass, field_size,$
               zgal,$      
               ID, $
               lun, $
-              dsche = dsche,$ 
               mc = mc,$        
-              mark_evol=mark_evol, $
               disp_prog = disp_prog
   
-  
+;; uploading some files
 @common_array_size
 @common_cosmo
 @common_param
 
+  ;; updating the log file 
   IF keyword_set(mc) EQ 0 THEN BEGIN
-     printf,lun, 'SF Mass function parameters'
+     printf,lun, 'SF Mass Function parameters (z, log(M_knee), Phi1, Phi2, apha1, alpha2)'
      printf,lun,strtrim(z_ilbert,1), $
             strtrim(logMknee,1), $
             strtrim(Phiknee1,1), $
@@ -24,11 +23,14 @@ PRO gen_mass, field_size,$
             strtrim(alpha2,1)
   ENDIF
   
+
+  ;; Open the progress bar (if specified)
   IF keyword_set(disp_prog) THEN BEGIN
      cgProgressBar = Obj_New("CGPROGRESSBAR", title='Generate Masses')
      cgProgressBar -> Start
   ENDIF
-  
+
+  ;; adapt the grid in redshift  
   IF field_size GT 10. THEN BEGIN
      zgridfactor = sqrt(field_size/10.)
      Nlog1plusz = Nlog1plusz*zgridfactor
@@ -38,23 +40,25 @@ PRO gen_mass, field_size,$
   
   omega = (2.*!PI/360.)^2*field_size ;omega converti en steradian
 
-  ;; We define the redshift grid
+  ;; Define the redshift grid
   log1plusz = dlog1plusz*(findgen(Nlog1plusz)+1.)
   log1pluszgrid = dlog1plusz*(findgen(Nlog1plusz+1)+0.5)
-  z = 10.^log1plusz-1.+0.3
-  zgrid = 10.^log1pluszgrid-1.+0.3
+  z = 10.^log1plusz-1.
+  zgrid = 10.^log1pluszgrid-1.
   dz = deriv(z)
   Nz = n_elements(z)
 
-  ;; For each redshift boundary, we compute the distance (DL)
+  ;; For each redshift boundary, we compute the luminosity distance (DL)
   DL = lumdist(z, H0=H0 , Omega_M=Omega_m, Lambda0=Omega_lambda,/SILENT)
 
   ;; For each redshift bin, we compute the ratio between the element
-  ;; of volume and the element of redshift (called: dVdz)
+  ;; of volume and the element of redshift (i.e. dV/dz)
   compute_dVdz, Dl, z, dVdz
   
-  ;; We bin the Mass (M) in "dlogM" steps. Therefore, M is a vector
-  ;; that contain the boundaries of the mass bins
+  ;;----------------------------
+  ;; Generate the stellar masses (Ilbert+2013)
+  ;;----------------------------
+
   logM = logMcut
   increment = 1
   WHILE max(logM) LT logMmax DO BEGIN
@@ -76,7 +80,7 @@ PRO gen_mass, field_size,$
  
   ;;Loop on the redshift
   FOR i = 0, Nz-2 DO BEGIN
-     
+     ;; Using a double Schechter for z<4
      IF zgrid[i] LT 4. THEN BEGIN
         Mknee_z = INTERPOL(10.^logMknee,z_ilbert,zgrid[i])
         Phiknee1_z = INTERPOL(Phiknee1,z_ilbert,zgrid[i])
@@ -90,7 +94,8 @@ PRO gen_mass, field_size,$
         
            
      ENDIF
-
+     ;; For z>4, we use a different redshift evolution of the parameters as suggested in
+     ;; Sargent+2012
      IF zgrid[i] GE 4. THEN BEGIN
         alpha = 1.3*(1+(zgrid[i]-2.))^0.19               
         Mknee = 10.^(alog10(10.^11.20)-0.3*(zgrid[i]-3.5))
@@ -118,7 +123,8 @@ PRO gen_mass, field_size,$
         Mslice = interpol(M,NsupMrenorm,X)
 
         push, Mstar, Mslice
- 
+  
+        ;; Randomly distribute the galaxies within the z slice
         zslice=zgrid[i]+(zgrid[i+1]-zgrid[i])*randomu(seed,ngal)
    
         push, zgal, zslice       
@@ -135,6 +141,7 @@ PRO gen_mass, field_size,$
      printf,lun, 'NUMBER OF SF GALAXIES GENERATED: '+strtrim(n_elements(zgal),1)
      printf,lun, 'LOW MASS CUT: '+strtrim(logMcut,1)+' solar masses'
      printf,lun, 'HIGH MASS CUT: '+strtrim(logMmax,1)+' solar masses'
+     printf,lun, 'MAX REDSHIFT: '+strtrim(max(zgal),1)
      printf,lun, '****************************************'
   ENDIF
   

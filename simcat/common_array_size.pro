@@ -1,4 +1,4 @@
-Nlog1plusz =20 ;lowz 30;high z 105
+Nlog1plusz =200
 dlog1plusz = 0.005
 
 NlogSnu = 200
