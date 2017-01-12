@@ -137,7 +137,7 @@ PRO gen_mass, field_size,$
 
   IF keyword_set(mc) EQ 0 THEN BEGIN
      printf,lun, '****************************************'
-     printf,lun, '     MASS FUNCTION (Ilbert+2013)'
+     printf,lun, '     MASS FUNCTION STAR-FORMING GALAXIES (Ilbert+2013)'
      printf,lun, 'NUMBER OF SF GALAXIES GENERATED: '+strtrim(n_elements(zgal),1)
      printf,lun, 'LOW MASS CUT: '+strtrim(logMcut,1)+' solar masses'
      printf,lun, 'HIGH MASS CUT: '+strtrim(logMmax,1)+' solar masses'

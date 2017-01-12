@@ -36,7 +36,7 @@ PRO gen_cat, ID ,$    ; Identification
   IF keyword_set(logMcut) EQ 0 THEN $
     logMcut = 8.
 
-  ;;Generate de stellar masses and redshifts (Ilbert+2013)
+  ;;Generate de stellar masses and redshifts for SF galaxies (Ilbert+2013)
   gen_mass, field_size,$
             logMcut,$ 
             Mstar,$     
@@ -51,20 +51,20 @@ PRO gen_cat, ID ,$    ; Identification
      printf,lun, '------------------------------------------------------------'
   ENDIF
 
+  ;;Generate de stellar masses and redshifts for quiescent galaxies (Ilbert+2013)
+  gen_passive, field_size, $
+               logMcut, $
+               Mstar_pass, $
+               zgal_pass, $
+               ID_pass, $
+               lun, $
+               mc = mc, $
+               disp_prog = disp_prog
 
-  ; gen_passive, field_size, $
-  ;              logMcut, $
-  ;              Mstar_pass, $
-  ;              zgal_pass, $
-  ;              ID_pass, $
-  ;              lun, $
-  ;              mc = mc, $
-  ;              disp_prog = disp_prog
-
-  ; IF keyword_set(mc) EQ 0 THEN BEGIN
-  ;    printf,lun, '------------------------------------------------------------'
-  ;    printf,lun, '------------------------------------------------------------'
-  ; ENDIF
+  IF keyword_set(mc) EQ 0 THEN BEGIN
+     printf,lun, '------------------------------------------------------------'
+     printf,lun, '------------------------------------------------------------'
+  ENDIF
 
   ; gen_sfr,ID, $
   ;         Mstar,$         
