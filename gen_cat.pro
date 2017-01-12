@@ -14,15 +14,9 @@ PRO gen_cat, ID ,$    ; Identification
              logMcut=logMcut,$ ; Low mass cut (mass function) in log; DEFAULT = 8
              mc=mc ; Add the random error on the parameters
 
-<<<<<<< HEAD
   ;; keyword to open a progress bar (change to 1 if wanted)
   IF keyword_set(mc) EQ 0 THEN $
      disp_prog = 0
-=======
-  ;; keyword to open a progress bar (change to 0 if not wanted)
-  IF keyword_set(mc) EQ 0 THEN $
-     disp_prog = 1
->>>>>>> e87063f83bc51e9c18294e78ea3ac8a15eab6466
   
   ;; Give a name to the files
   name = 'My_First_Catalogue'
@@ -38,11 +32,7 @@ PRO gen_cat, ID ,$    ; Identification
   
   ;;Define field size and logMcut if not defined (using default values)
   IF keyword_set(field_size) EQ 0 THEN $
-<<<<<<< HEAD
     field_size = 1
-=======
-    field_size = 2
->>>>>>> e87063f83bc51e9c18294e78ea3ac8a15eab6466
   IF keyword_set(logMcut) EQ 0 THEN $
     logMcut = 8.
 
@@ -108,11 +98,7 @@ PRO gen_cat, ID ,$    ; Identification
      printf,lun, '------------------------------------------------------------'
      printf,lun, '------------------------------------------------------------'
   ENDIF
-<<<<<<< HEAD
 
-=======
-  
->>>>>>> e87063f83bc51e9c18294e78ea3ac8a15eab6466
   ;;We combine passive and active
   sfactive = [Mstar*0.+1.,Mstar_pass*0.]
   Mstar = [Mstar,Mstar_pass]
@@ -120,19 +106,11 @@ PRO gen_cat, ID ,$    ; Identification
   zgal = [zgal,zgal_pass]
   ID = [ID,max(ID)+ID_pass]
   type = [type, Mstar_pass*0-1]
-<<<<<<< HEAD
   logSFRms = [logSFRms, Mstar_pass*0.-99.]
   SFRir = [SFRir, Mstar_pass*0.-99.]
   SFRuv = [SFRuv, Mstar_pass*0.-99.]
   Lir = [Lir, Mstar_pass*0.-99.]
   Luv = [Luv, Mstar_pass*0.-99.]
-=======
-  logSFRms = [logSFRms, logSFRms*0.-99.]
-  SFRir = [SFRir, SFRir*0.-99.]
-  SFRuv = [SFRuv, sfruv*0.-99.]
-  Lir = [Lir, Lir*0.-99.]
-  Luv = [Luv, Luv*0.-99.]
->>>>>>> e87063f83bc51e9c18294e78ea3ac8a15eab6466
 
   gen_sfr_pass, Mstar,$
                 zgal,$
@@ -199,7 +177,6 @@ PRO gen_cat, ID ,$    ; Identification
      free_lun, lun
   ENDIF
 
-<<<<<<< HEAD
   logfile = 'no'
   IF keyword_set(mc) EQ 0 THEN $
      READ, logfile, PROMPT='Would you like to open the log file? (no)'
@@ -212,20 +189,6 @@ PRO gen_cat, ID ,$    ; Identification
      READ, saving, PROMPT='Would you like to save the catalogue? (no)'
   
   IF saving EQ 'yes' THEN BEGIN
-=======
-  ; logfile = 'no'
-  ; IF keyword_set(mc) EQ 0 THEN $
-  ;    READ, logfile, PROMPT='Do you want to open the log file? (no)'
-  
-  ; IF logfile EQ 'yes' THEN $
-  ;    SPAWN, 'open ../catalogues/'+name+'.txt &'
-  
-  ; saving = 'no'
-  ; IF keyword_set(mc) EQ 0 THEN $
-  ;    READ, saving, PROMPT='Do you want to save it? (no)'
-  
-  ; IF saving EQ 'yes' THEN BEGIN
->>>>>>> e87063f83bc51e9c18294e78ea3ac8a15eab6466
      
   ;    o = where(loglambda GT -1.3)
   ;    loglambda = loglambda[o]
@@ -234,7 +197,6 @@ PRO gen_cat, ID ,$    ; Identification
   ;    Mstar = Mstar[o]
   ;    sfactive = sfactive[o]
 
-<<<<<<< HEAD
      save, filename = '../catalogues/'+name+'.save',$
            FIELD_SIZE, $
            ID ,$             
@@ -255,31 +217,5 @@ PRO gen_cat, ID ,$    ; Identification
      IF keyword_set(mc) EQ 0 THEN $
         print, 'Finished without errors but DID NOT saved the mock catalogue'
   ENDELSE 
-=======
-  ;    stop
-
-     save, filename = '../catalogues/'+name+'.save',$
-           FIELD_SIZE, $
-           ID ,$             ;; ID
-           zgal ,$           ;; redshift
-           Mstar;,$           ;; Mass
-           ; type,$            ;; Ignore
-  ;          SFR,$             ;; The star formation rate (SFR)
-  ;          logSFRms,$        ;; Ignore
-  ;          logsSFRexcess, $
-  ;          sfrir,$           ;; Ignore
-  ;          sfruv,$           ;; Ignore
-  ;          Lir,$             ;; The IR luminosity
-  ;          Luv, $            ;; The UV luminosity
-  ;          loglambda, $
-  ;          sfactive
-
-  ;    print, 'Finished without errors and saved the mock catalogue'
-
-  ; ENDIF ELSE BEGIN
-  ;    IF keyword_set(mc) EQ 0 THEN $
-        print, 'Finished without errors but DID NOT saved the mock catalogue'
-  ; ENDELSE 
->>>>>>> e87063f83bc51e9c18294e78ea3ac8a15eab6466
   
 END
