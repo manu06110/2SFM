@@ -215,7 +215,7 @@ PRO gen_cat, ID ,$    ; Identification
 
   ; ENDIF ELSE BEGIN
   ;    IF keyword_set(mc) EQ 0 THEN $
-  ;       print, 'Finished without errors but DID NOT saved the mock catalogue'
+        print, 'Finished without errors but DID NOT saved the mock catalogue'
   ; ENDELSE 
   
 END
