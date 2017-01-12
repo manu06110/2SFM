@@ -10,10 +10,10 @@ SF Mass Function parameters (z, log(M_knee), Phi1, Phi2, apha1, alpha2)
 -1.40000 -1.43000 -1.51000 -1.37000 -1.60000 -1.60000 -1.60000 -1.60000
 ****************************************
      MASS FUNCTION STAR-FORMING GALAXIES (Ilbert+2013)
-NUMBER OF SF GALAXIES GENERATED: 2031098
+NUMBER OF SF GALAXIES GENERATED: 2033325
 LOW MASS CUT: 8.00000 solar masses
 HIGH MASS CUT: 14.0000 solar masses
-MAX REDSHIFT: 8.94254
+MAX REDSHIFT: 8.94258
 ****************************************
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -26,10 +26,10 @@ Quiescent Mass function parameters (bin in z, log(Mknee), Phi1, Phi2, alpha1, al
 -1.52000 0.00000 0.00000 0.00000 0.00000 0.00000 0.00000
 ****************************************
      MASS FUNCTION QUIESCENT GALAXIES (Ilbert+2013)
-NUMBER OF QUI GALAXIES GENERATED: 31366
+NUMBER OF QUI GALAXIES GENERATED: 31186
 LOW MASS CUT: 8.00000 solar masses
 HIGH MASS CUT: 15.0000 solar masses
-MAX REDSHIFT: 3.68091
+MAX REDSHIFT: 3.30898
 ****************************************
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -39,10 +39,18 @@ m0,a0,a1,a2,sigma_MS,sigma_SB,fSB,B_SB,x0
 ****************************************
     SFR DISTRIBUTION (Schreiber+2015)
 FRACTION OF SB GALAXIES: 3.30000 PERCENT
-MIN SFR: 0.0037953659 Msun/yr
-MAX SFR: 15476.903 Msun/yr
+MIN SFR: 0.0041954913 Msun/yr
+MAX SFR: 11014.885 Msun/yr
 ****************************************
 ------------------------------------------------------------
 ------------------------------------------------------------
+Attenuation relation parameters
+slope, constant, scatter, Kir, Kuv 
+1.60000 -13.5000 0.500000 1.79850e-10 2.80500e-10
+****************************************
+  ATTENUATION RELATION (PANNELLA+2015)
+RANGE LIR: 7082790.7 - 6.0888864e+13 Lsun
+RANGE LUV: 10415870. - 2.6284210e+11 Lsun
+****************************************
 ------------------------------------------------------------
 ------------------------------------------------------------

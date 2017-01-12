@@ -75,25 +75,24 @@ PRO gen_cat, ID ,$    ; Identification
           lun, $
           mc = mc, $
           disp_prog = disp_prog
-          
+
   IF keyword_set(mc) EQ 0 THEN BEGIN
      printf,lun, '------------------------------------------------------------'
      printf,lun, '------------------------------------------------------------'
   ENDIF
 
-  ; gen_att_lum,Mstar,$
-  ;             zgal,$
-  ;             type,$
-  ;             SFR,$
-  ;             logSFRms, $
-  ;             logsSFRexcess, $
-  ;             SFRir,$
-  ;             SFRuv,$
-  ;             Lir,$
-  ;             Luv, $
-  ;             lun, $
-  ;             mc = mc, $
-  ;             disp_prog = disp_prog
+  gen_att_lum,Mstar,$
+              zgal,$
+              type,$
+              SFR,$
+              logSFRms, $
+              SFRir,$
+              SFRuv,$
+              Lir,$
+              Luv, $
+              lun, $
+              mc = mc, $
+              disp_prog = disp_prog
 
   ; IF keyword_set(mc) EQ 0 THEN BEGIN
   ;    printf,lun, '------------------------------------------------------------'
