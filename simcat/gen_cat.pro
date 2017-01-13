@@ -20,7 +20,7 @@ PRO gen_cat, ID ,$    ; Identification
   
   ;; Give a name to the files
   name = 'My_First_Catalogue'
-  
+
   ;;Define field size and logMcut if not defined (using default values)
   IF keyword_set(field_size) EQ 0 THEN $
     field_size = 1
@@ -136,47 +136,6 @@ PRO gen_cat, ID ,$    ; Identification
      printf,lun, '------------------------------------------------------------'
      printf,lun, '------------------------------------------------------------'
   ENDIF
-  
-  ; gen_bhar_mass,field_size, $
-  ;               Mstar,$
-  ;               zgal,$
-  ;               type,$
-  ;               SFR,$
-  ;               logSFRms, $
-  ;               logsSFRexcess, $
-  ;               SFRir,$
-  ;               SFRuv,$
-  ;               Lir,$
-  ;               Luv, $
-  ;               loglambda, $
-  ;               sfactive, $
-  ;               lun, $
-  ;               mc = mc, $
-  ;               disp_prog = disp_prog
-
-  ; ; gen_bhar_one_comp, field_size, $
-  ; ;                  Mstar,$
-  ; ;                  zgal,$
-  ; ;                  type,$
-  ; ;                  SFR,$
-  ; ;                  logSFRms, $
-  ; ;                  logsSFRexcess, $
-  ; ;                  SFRir,$
-  ; ;                  SFRuv,$
-  ; ;                  Lir,$
-  ; ;                  Luv, $
-  ; ;                  loglambda, $
-  ; ;                  sfactive, $
-  ; ;                  AGNflag, $
-  ; ;                  lun, $
-  ; ;                  mc = mc, $
-  ; ;                  disp_prog = disp_prog
-
-  ; IF keyword_set(mc) EQ 0 THEN BEGIN
-  ;    printf,lun, '------------------------------------------------------------'
-  ;    printf,lun, '------------------------------------------------------------'
-  ;    free_lun, lun
-  ; ENDIF
 
   logfile = 'no'
   IF keyword_set(mc) EQ 0 THEN $
