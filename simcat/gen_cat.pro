@@ -20,6 +20,12 @@ PRO gen_cat, ID ,$    ; Identification
   
   ;; Give a name to the files
   name = 'My_First_Catalogue'
+  
+  ;;Define field size and logMcut if not defined (using default values)
+  IF keyword_set(field_size) EQ 0 THEN $
+    field_size = 1
+  IF keyword_set(logMcut) EQ 0 THEN $
+    logMcut = 8.
 
   ;; Open the log file
   IF keyword_set(mc) EQ 0 THEN BEGIN
@@ -30,11 +36,6 @@ PRO gen_cat, ID ,$    ; Identification
   ;; Make IDL quiet
   !QUIET = 1
   
-  ;;Define field size and logMcut if not defined (using default values)
-  IF keyword_set(field_size) EQ 0 THEN $
-    field_size = 1
-  IF keyword_set(logMcut) EQ 0 THEN $
-    logMcut = 8.
 
   ;;Generate de stellar masses and redshifts for SF galaxies (Ilbert+2013)
   gen_mass, field_size,$
