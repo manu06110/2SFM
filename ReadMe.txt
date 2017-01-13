@@ -4,11 +4,30 @@ The code 2SFM is a semi-empirical model that generates a catalogue of mock galax
 
 Model description
 
-This model is based on observed relationships. It generates mock galaxies in a fixed volume (i.e. up to a certain redshift) that is defined by the user. The total number of galaxies in the volume is given by the stellar mass functions of Ilbert et al. (2013) at various redshifts. We consider both populations explored in Ilbert et al. (2013), the quiescent and the star-forming galaxies. We define a redshift grid in which we interpolate (z<4) or extrapolate (z>4) the mas functions of Ilbert et al. (2013). We show in Bernhard et al. (2014) that the model works fine up to z~6. Once the redshifts and the stellar masses are defined, we allocate a SFR. For star forming galaxies, we first allocate SFRs that follow the main sequence (MS) of Schreiber et al. (2015; constitute an update of Bernhard et al. 2014) and then randomly scatter the MS SFRs following the SFR distribution of Sargent et al. (2012), and accounting for the Starburst population. For the quiescent population, since Ilbert et al. (2013) selection implies a cut in specific SFR (i.e. log(SFR/M/yr)<-11), we arbitrary allocate SFR within a Gaussian with -13<log(SFR/M/yr)<-11. Once SFRs are derived, and for star-forming galaxies only, we derive the attenuated (i.e. IR) and un-attenuated (i.e. UV) SFR components. To do so, we use the empirical relationship between stellar masses and attenuation (or IRX defined as log(Lir/Luv); Pannella et al. 2015). We then use Kennicutt et al. (1998), adapted for a Salpeter IMF, to derive the UV and IR luminosities of each mock star-forming galaxies.
+This model is based on observed relationships. It generates mock galaxies in a fixed volume (i.e. up to a certain redshift) that is defined by the user. The total number of galaxies in the volume is given by the stellar mass functions of Ilbert et al. (2013) at various redshifts. We consider both populations explored in Ilbert et al. (2013), the quiescent and the star-forming galaxies. We define a redshift grid in which we interpolate (z<4) or extrapolate (z>4) the mas functions of Ilbert et al. (2013). We show in Bernhard et al. (2014) that the model works fine up to z~6. Once the redshifts and the stellar masses are defined, we allocate a SFR. For star forming galaxies, we first allocate SFRs that follow the main sequence (MS) of Schreiber et al. (2015; constitute an update of Bernhard et al. 2014) and then randomly scatter the MS SFRs following the SFR distribution of Sargent et al. (2012), and accounting for the Starburst population. For the quiescent population, since Ilbert et al. (2013) selection implies a cut in specific SFR (i.e. log(SFR/M/yr)<-11), we arbitrary allocate SFR within a Gaussian with -13<log(SFR/M/yr)<-11. Once SFRs are derived, and for star-forming galaxies only, we derive the attenuated (i.e. IR) and un-attenuated (i.e. UV) SFR components. To do so, we use the empirical relationship between stellar masses and attenuation (or IRX defined as log(Lir/Luv); Pannella et al. 2015). We then use Kennicutt et al. (1998), adapted for a Salpeter initial mass function (IMF), to derive the UV and IR luminosities of each mock star-forming galaxies.
 
 Files description
 
 The main folder contains the simcat directory and the catalogues directory. In the simcat directory, you can find all the IDL procedures that generate catalogues that will be saved in the catalogues directory. Within the simcat directory, you have:
 
 gen_cat.pro:
-	It is the main procedure that runs the 2SFM. Open IDL and run "IDL> gen_cat". You can open gen_cat and change the name of the catalogue (default: My_First_Catalogue), the field size (default: 1") and the low mass cut of the mass functions (default: 8).
+	It is the main procedure that runs the 2SFM. Open IDL and run "IDL> gen_cat". Otherwise, one can open gen_cat.pro and change the name of the catalogue (default: My_First_Catalogue), the field size (default: 1") and the low mass cut of the mass functions (default: 8). gen_cat.pro will run the different procedures, and ask if you want to save the catalogue containing the galaxy properties in the folder catalogues.
+
+gen_mass.pro:
+	It generates the stellar masses FOR STAR-FORMING GALAXIES ONLY following Ilbert et al. (2013). It also randomly allocate redshifts within the redshift grid.
+
+gen_passive.pro
+	It generates the stellar masses for passive galaxies following Ilbert et al. (2013).
+
+gen_sfr.pro
+	It allocate SFRs FOR STAR-FORMING GALAXIES ONLY following the MS of Schreiber et al. (2015) and randomly distribute them following the SFR distribution of Sargent et al. (2012).
+
+gen_att_lum.pro
+	It considers, FOR STAR-FORMING GALAXIES ONLY, the empirical relationship between the stellar masses and the Attenuation of Pannella et al. (2015) to split the SFR into a UV and a IR components. It then uses Kennicutt et al. (1998) for a Sapeter IMF to work out UV and IR luminosities.
+
+gen_sfr_pass.pro
+	It generates the SFR for quiescent galaxies.
+
+common_array_size, common_param, common_cosmo, and compute_dvdz:
+	They are necessary background procedures.
+	/!\ At the moment, if the redshift needs to be changed, it is by opening the file common_array_size and changing the parameter Nlog1plusz to a higher or a lower value /!\ It defines the number of element in the redshift grids and therefore the maximum redshift.
