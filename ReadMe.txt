@@ -11,7 +11,7 @@ Files description:
 	The main folder contains the simcat directory and the catalogues directory. In the simcat directory, you can find all the IDL procedures that generate catalogues that will be saved in the catalogues directory. Within the simcat directory, you have:
 
 	gen_cat.pro:
-		It is the main procedure that runs the 2SFM. Open IDL and run "IDL> gen_cat". Otherwise, one can open gen_cat.pro and change the name of the catalogue (default: My_First_Catalogue), the field size (default: 1") and the low mass cut of the mass functions (default: 8). gen_cat.pro will run the different procedures, and ask if you want to save the catalogue containing the galaxy properties in the folder catalogues.
+		It is the main procedure that runs the 2SFM. Open IDL and run "IDL> gen_cat". Otherwise, one can open gen_cat.pro and change the name of the catalogue (default: My_First_Catalogue), the field size (default: 1") and the low mass cut of the mass functions (default: 8). gen_cat.pro will run the different procedures, and ask if you want to save the catalogue containing the galaxy properties in the folder catalogues. In the catalogues directory, you can also find a txt file associated to the catalogue name. It contains the main parameters used to run the 2SFM.
 
 	gen_mass.pro:
 		It generates the stellar masses FOR STAR-FORMING GALAXIES ONLY following Ilbert et al. (2013). It also randomly allocate redshifts within the redshift grid.
@@ -53,6 +53,7 @@ Very important informations:
 Future Work
 	I am actually implementing AGNs at the moment (Part of my PhD work). It is almost there and it will be updated soon.
 	I will carry on updating this version too, there are plenty of things to improve.
+	Updating the mass functions to the last up-to-date of Davidzon et al. (2017).
 
 Acknowledgement
 	I gratefully acknowledge Matthieu Bethermin for the primary idea of this model. I also would like to thank Mark Sargent, Corentin Schreiber and James Mullaney for their deep implication in the project.
