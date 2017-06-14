@@ -15,12 +15,12 @@ PRO gen_mass, field_size,$
   ;; updating the log file 
   IF keyword_set(mc) EQ 0 THEN BEGIN
      printf,lun, 'SF Mass Function parameters (z, log(M_knee), Phi1, Phi2, apha1, alpha2)'
-     printf,lun,strtrim(z_ilbert,1), $
-            strtrim(logMknee,1), $
-            strtrim(Phiknee1,1), $
-            strtrim(Phiknee2,1), $
-            strtrim(alpha1,1), $
-            strtrim(alpha2,1)
+     printf,lun,strtrim(z_david,1), $
+                strtrim(logMknee,1), $
+                strtrim(Phiknee1,1), $
+                strtrim(Phiknee2,1), $
+                strtrim(alpha1,1), $
+                strtrim(alpha2,1)
   ENDIF
   
 
@@ -82,11 +82,11 @@ PRO gen_mass, field_size,$
   FOR i = 0, Nz-2 DO BEGIN
      ;; Using a double Schechter for z<4
      IF zgrid[i] LT 4. THEN BEGIN
-        Mknee_z = INTERPOL(10.^logMknee,z_ilbert,zgrid[i])
-        Phiknee1_z = INTERPOL(Phiknee1,z_ilbert,zgrid[i])
-        Phiknee2_z = INTERPOL(Phiknee2,z_ilbert,zgrid[i])
-        alpha1_z = INTERPOL(alpha1,z_ilbert,zgrid[i])
-        alpha2_z = INTERPOL(alpha2,z_ilbert,zgrid[i])
+        Mknee_z = INTERPOL(10.^logMknee,z_david,zgrid[i])
+        Phiknee1_z = INTERPOL(Phiknee1,z_david,zgrid[i])
+        Phiknee2_z = INTERPOL(Phiknee2,z_david,zgrid[i])
+        alpha1_z = INTERPOL(alpha1,z_david,zgrid[i])
+        alpha2_z = INTERPOL(alpha2,z_david,zgrid[i])
         
         Phi_z = 1d*exp(-M/Mknee_z)* $
                 (Phiknee1_z*(M/Mknee_z)^alpha1_z+ $
@@ -137,7 +137,7 @@ PRO gen_mass, field_size,$
 
   IF keyword_set(mc) EQ 0 THEN BEGIN
      printf,lun, '****************************************'
-     printf,lun, '     MASS FUNCTION STAR-FORMING GALAXIES (Ilbert+2013)'
+     printf,lun, '     MASS FUNCTION STAR-FORMING GALAXIES (Davodzon+2017)'
      printf,lun, 'NUMBER OF SF GALAXIES GENERATED: '+strtrim(n_elements(zgal),1)
      printf,lun, 'LOW MASS CUT: '+strtrim(logMcut,1)+' solar masses'
      printf,lun, 'HIGH MASS CUT: '+strtrim(logMmax,1)+' solar masses'

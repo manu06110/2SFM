@@ -1,23 +1,14 @@
 ;;Max mass
 logMmax = 14.
 
-;;z vector in Ilbert
-z_ilbert = [0.35,0.65,0.95,1.30,1.75,2.25,2.75,3.50]
-;;z_ilbert = [0.35,0.65,0.95,1.30,1.75,2.25,2.75,3.50]
+;;z vector (Davidzon et al. 2017)
+z_david = [0.35,0.65,0.95,1.3,1.75,2.25,2.75,3.25,4.]
 
-;;knee of the mass function in Ilbert (Chabrier IMF)
-logMknee = [10.60,10.62,10.80,10.67,10.66,10.73,10.90,10.74]+0.24
-Phiknee1 = [1.16,.77,.50,.53,.75,.50,.15,0.02]*1.e-3
-Phiknee2 = [1.08,0.84,0.48,0.87,0.39,0.15,0.11,0.10]*1.e-3
-alpha1 = [0.17,0.03,-0.67,0.11,-0.08,-0.33,-0.62,1.31]
-alpha2 = [-1.40,-1.43,-1.51,-1.37,-1.6,-1.6,-1.6,-1.6]
-
-;; Vector containing the errors for Ilbert parameters Eq. 2
-elogMknee = [0.13,0.13,0.12,0.10,0.07,0.08,0.21,0.25]
-ePhiknee1 = [0.35,0.25,0.32,0.21,0.09,0.07,0.08,0.01]*1.e-3
-ePhiknee2 = [0.30,0.31,0.41,0.35,0.07,0.05,0.07,0.06]*1.e-3
-ealpha1 = [0.61,0.70,0.70,0.70,0.30,0.33,0.9,0.87]
-ealpha2 = [0.04,0.08,0.5,0.11,0.,0.,0.,0.]
+logMknee = [10.26,10.40,10.35,10.42,10.40,10.45,10.39,10.83,10.77]+0.24
+Phiknee1 = [2.410,1.661,1.739,1.542,1.156,0.441,0.441,0.086,0.052]*1.e-3
+Phiknee2 = [1.30,0.86,0.95,0.49,0.46,0.38,0.13,0,0]*1.e-3
+alpha1 = [-1.29,-1.32,-1.29,-1.21,-1.24,-1.50,-1.52,-1.78,-1.84]
+alpha2 = [1.01,0.84,0.81,1.11,0.90,0.59,1.05,0,0]
 
 ;;SFR Schreiber
 m0 = 0.5
@@ -57,27 +48,3 @@ eIRX0 = 0.04
 alpha_P15 = 1.6
 Auv0_P15 = -13.5
 scat_P15 = 0.5
-
-;;acc rate param (bimode)
-;; restore, '../MC_fit/Chain/Samp_m8p0_z2p75_WeightPois_bimod_manu_results.save'
-;; logA_sf = res_fit[0]+0.1
-;; elogA_sf = error[0]
-;; logA_qui = res_fit[1]+0.1
-;; elogA_qui = error[1]
-;; loglambda_break_sf = res_fit[2]
-;; eloglambda_break_sf = error[2]
-;; loglambda_break_qui = res_fit[3]
-;; eloglambda_break_qui = error[3]
-;; gamma_sf = [res_fit[4],res_fit[5]]
-;; egamma_sf = [error[4],error[5]]
-;; gamma_qui = [res_fit[6],res_fit[7]]
-;; egamma_qui = [error[6],error[7]]
-
-; logA_sf = -4.1
-; logA_qui = -4.6
-; gamma_sf = [-0.2,4.3]
-; gamma_qui = [-0.2,3.2]
-; loglambda_break_sf = 0.1
-; loglambda_break_qui = -0.87
-
-;;print, logA_sf, logA_qui, loglambda_break_sf, loglambda_break_qui, gamma_sf, gamma_qui

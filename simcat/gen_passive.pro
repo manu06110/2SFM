@@ -43,7 +43,7 @@ PRO gen_passive, field_size, $
   compute_dVdz, Dl, z, dVdz
 
   ;;----------------------------
-  ;; Generate the stellar masses (Ilbert+2013)
+  ;; Generate the stellar masses (Davidzon+2017)
   ;;----------------------------
 
   logMmax = 15.
@@ -57,18 +57,17 @@ PRO gen_passive, field_size, $
   zgal = -1.
   
   ;; Ilbert+2013 parameters for the passive galaxies
-  zvec = [0.35,0.65,0.95,1.30,1.75,2.25,2.75]
+  zvec = [0.35,0.65,0.95,1.3,1.75,2.25,2.75,3.25,4.]
   
-  logMknee = [10.91,10.93,10.81,10.72,10.73,10.59,10.27]+0.24
-  elogMknee = [0.08,0.04,0.03,0.03,0.04,0.06,0.09]
-  Phiknee1 = [1.27,1.11,1.57,0.70,0.22,0.10,0.003]*1.e-3
-  ePhiknee1 = [0.2,0.,0.,0.,0.,0.,0.]*1e-3
-  Phiknee2 = [0.03,0.,0.,0.,0.,0.,0.]*1.e-3
-  ePhiknee2 = [0.07,0.1,0.09,0.03,0.01,0.01,0.004]*1d-3
-  alpha1 = [-0.68,-0.46,-0.11,0.04,0.10,0.88,3.26]
-  ealpha1 = [0.18,0.05,0.05,0.06,0.09,0.22,0.93]
-  alpha2 = [-1.52,0.,0.,0.,0.,0.,0.]
-  ealpha2 = 0.35
+  logMknee = [10.83,10.83,10.75,10.56,10.54,10.69,10.24,10.10,10.27]+0.24
+  ;elogMknee = [0.08,0.04,0.03,0.03,0.04,0.06,0.09]
+  Phiknee1 = [0.098,0.012,1.724,0.757,0.251,0.068,0.028,0.010,0.004]*1.e-3
+  ;ePhiknee1 = [0.2,0.,0.,0.,0.,0.,0.]*1e-3
+  Phiknee2 = [1.58,1.44,0.,0.,0.,0.,0.,0.,0.]*1.e-3
+  ;ePhiknee2 = [0.07,0.1,0.09,0.03,0.01,0.01,0.004]*1d-3
+  alpha1 = [-1.3,-1.46,-0.07,0.53,0.93,0.17,1.15,1.15,1.15]
+  ;ealpha1 = [0.18,0.05,0.05,0.06,0.09,0.22,0.93]
+  alpha2 = [-0.39,-0.21,0.,0.,0.,0.,0.,0.,0.]
   
   IF keyword_set(mc) THEN BEGIN
      logMknee = logMknee+elogMknee*randomn(seed)
@@ -147,7 +146,7 @@ PRO gen_passive, field_size, $
   IF keyword_set(mc) EQ 0 THEN BEGIN
      printf,lun, 'Quiescent Mass function parameters (bin in z, log(Mknee), Phi1, Phi2, alpha1, alpha2)'
      
-     printf,lun,strtrim(z_ilbert,1), $
+     printf,lun,strtrim(z_david,1), $
             strtrim(logMknee,1), $
             strtrim(Phiknee1,1), $
             strtrim(Phiknee2,1), $
